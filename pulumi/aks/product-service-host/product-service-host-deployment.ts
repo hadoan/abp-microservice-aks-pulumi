@@ -1,33 +1,31 @@
 import * as k8s from "@pulumi/kubernetes";
-import { DeploymentConsts } from "../common/consts";
+import { DeploymentConsts } from "../../common/consts";
 import * as pulumi from "@pulumi/pulumi";
 
-export class BackendDeployment {
+export class IdentityServiceDeployment {
     config = new pulumi.Config();
-    podName = "auth-server-host";
-    imagename = "auth-server-host-image";
-    configMap = new BackendConfig().configName;
+    baseName = DeploymentConsts.PRODUCT_SERVICE_BASE_NAME;
     New() {
 
-        return new k8s.apps.v1.Deployment(this.podName + "-deployment", {
-            metadata: { name: this.podName },
+        return new k8s.apps.v1.Deployment(this.baseName + "-deployment", {
+            metadata: { name: this.baseName },
             spec: {
-                selector: { matchLabels: { app: this.podName } },
+                selector: { matchLabels: { app: this.baseName } },
                 replicas: 1,
                 template: {
-                    metadata: { labels: { app: this.podName } },
+                    metadata: { labels: { app: this.baseName } },
                     spec: {
                         containers: [
                             {
-                                name: this.imagename,
-                                image: `${DeploymentConsts.EcrUrlBase}:${this.imagename}`,
+                                name: this.baseName,
+                                image: `${DeploymentConsts.AZURE_CONTAINER_REG_BASE_URL}${this.baseName}:latest`,
                                 args: [
                                     "dotnet",
-                                    "AuthServer.Host.dll"
+                                    "IdentityService.Host.dll"
                                 ],
                                 volumeMounts: [
                                     {
-                                        name: this.configMap + "-volume",
+                                        name: this.baseName + "-volume",
                                         mountPath: "/etc/config"
                                     }
                                 ],
@@ -36,8 +34,8 @@ export class BackendDeployment {
                         ],
                         volumes: [
                             {
-                                name: this.configMap + "-volume",
-                                configMap: { name: this.configMap }
+                                name: this.baseName + "-volume",
+                                configMap: { name: this.baseName }
                             }
                         ]
                     }

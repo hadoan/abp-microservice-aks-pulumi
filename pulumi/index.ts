@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as azure from "@pulumi/azure";
 import { DeploymentConsts } from './common/consts';
 import * as sql from './databases/sql-deployments';
-import * as aks from './aks/aks';
+import * as aks from './aks/aks-deployment';
 import * as registry from './container-registry/container-registry';
 
 
@@ -21,7 +21,9 @@ const resourceGroup = new azure.core.ResourceGroup(resourceGroupName, {
 const containerRegistry = registry.newContainerRegistry(resourceGroup);
 
 //Deploy AKS
-// const aksCluster = aks.newAks(resourceGroup);
+const aksCluster = aks.newAks(resourceGroup);
+
+
 
 // Export the connection string for the storage account
 export const appResourceGroupName = resourceGroupName;
