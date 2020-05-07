@@ -3,7 +3,7 @@ import * as azure from "@pulumi/azure";
 import { DeploymentConsts } from '../common/consts';
 
 export const dbUserName = "sql";
-export const dbUserPwd = "MicroserviceDemo@123!!";
+export const dbUserPwd = "!!MicroserviceDemo@1111!!";
 
 export function newSqlServer(resourceGroup: azure.core.ResourceGroup) {
     const serverName = DeploymentConsts.APP_NAME + "-sql-server";
