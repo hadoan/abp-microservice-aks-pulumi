@@ -49,10 +49,10 @@ export class IngressService {
                             http: {
                                 paths: [
                                     {
-                                        path: "/sendbird",
+                                        path: "/auth-server",
                                         backend: {
-                                            serviceName: 'service',
-                                            servicePort: 8686,
+                                            serviceName: DeploymentConsts.AUTH_SERVER_BASE_NAME,
+                                            servicePort: 80,
                                         }
                                     }
                                 ],

@@ -17,13 +17,13 @@ const resourceGroup = new azure.core.ResourceGroup(resourceGroupName, {
     location: "SoutheastAsia"
 });
 
-//Deploy database
-// const sqlServer = sql.newSqlServer(resourceGroup);
-// const identityDb = sql.newIdentityDb(resourceGroup, sqlServer);
-// const productDb = sql.newProductDb(resourceGroup, sqlServer);
+// Deploy database
+const sqlServer = sql.newSqlServer(resourceGroup);
+const identityDb = sql.newIdentityDb(resourceGroup, sqlServer);
+const productDb = sql.newProductDb(resourceGroup, sqlServer);
 
-//Deploy container registry
-// const containerRegistry = registry.newContainerRegistry(resourceGroup);
+// Deploy container registry
+const containerRegistry = registry.newContainerRegistry(resourceGroup);
 
 //Deploy AKS
 const aksCluster = aks.newAks(resourceGroup);

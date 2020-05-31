@@ -1,0 +1,3 @@
+name: abp-microservice-aks
+runtime: nodejs
+description: A minimal Azure TypeScript Pulumi program

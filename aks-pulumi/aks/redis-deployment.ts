@@ -5,7 +5,7 @@ import * as config from '../common/config';
 import * as k8s from "@pulumi/kubernetes";
 
 export function newRedis() {
-    const redis = new k8s.helm.v2.Chart("rabbitmq", {
+    const redis = new k8s.helm.v2.Chart("redis", {
         fetchOpts: { repo: "https://charts.bitnami.com/bitnami" },
         chart: 'redis'
     });
